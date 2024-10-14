@@ -5,13 +5,12 @@ st.set_page_config(layout="wide")
 
 # Customize the sidebar
 markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
+Jawa Barat
 """
 
 st.sidebar.title("About")
 st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
+logo = "Logo_Bandung-removebg-preview.png"
 st.sidebar.image(logo)
 
 # Customize page title
