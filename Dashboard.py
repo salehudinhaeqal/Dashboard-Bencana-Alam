@@ -18,17 +18,14 @@ st.title("Dashboard Bencana Alam Kota Bandung")
 
 st.markdown(
     """
-    This multipage app template demonstrates various interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). It is an open-source project and you are very welcome to contribute to the [GitHub repository](https://github.com/opengeos/streamlit-map-template).
+    Bandung, ibu kota Provinsi Jawa Barat, merupakan salah satu kota terbesar di Indonesia dan dikenal dengan julukan "Kota Kembang" serta "Paris van Java". Kota ini terletak di dataran tinggi dengan cuaca yang sejuk, menjadikannya tujuan favorit wisatawan lokal dan mancanegara. Bandung juga menjadi pusat pendidikan, inovasi, dan industri kreatif di Indonesia.
     """
 )
 
-st.header("Instructions")
+st.header("Peta Prediksi Potensi Rentan Banjir Kota Bandung")
 
 markdown = """
-1. For the [GitHub repository](https://github.com/opengeos/streamlit-map-template) or [use it as a template](https://github.com/opengeos/streamlit-map-template/generate) for your own project.
-2. Customize the sidebar by changing the sidebar text and logo in each Python files.
-3. Find your favorite emoji from https://emojipedia.org.
-4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
+
 
 """
 
