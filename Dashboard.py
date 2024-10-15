@@ -37,9 +37,9 @@ deskripsi_kecamatan = {
     "Ujungberung": {"desc": "Perumahan dan pusat seni.", "coords": [-6.9173, 107.7178]}
 }
 
-# Sidebar untuk memilih kecamatan
+# Sidebar untuk memilih kecamatan, termasuk opsi 'Semua Kecamatan'
 st.sidebar.title("Kecamatan di Bandung")
-kecamatan = st.sidebar.selectbox("Pilih Kecamatan", list(deskripsi_kecamatan.keys()))
+kecamatan = st.sidebar.selectbox("Pilih Kecamatan", ["Semua Kecamatan"] + list(deskripsi_kecamatan.keys()))
 
 # Logo dan informasi sidebar
 logo = "Logo_Bandung-removebg-preview.png"
@@ -47,17 +47,26 @@ st.sidebar.image(logo)
 
 # Judul halaman dan deskripsi dinamis
 st.title(f"Dashboard Bencana Alam - {kecamatan}")
-st.markdown(f"**{kecamatan}**: {deskripsi_kecamatan[kecamatan]['desc']}")
 
-st.header(f"Peta Prediksi Potensi Rentan Banjir di Kecamatan {kecamatan}")
+if kecamatan == "Semua Kecamatan":
+    st.markdown("**Menampilkan semua kecamatan di Bandung beserta titik koordinatnya.**")
+else:
+    st.markdown(f"**{kecamatan}**: {deskripsi_kecamatan[kecamatan]['desc']}")
 
-# Menampilkan peta dengan lokasi kecamatan terpilih
+st.header(f"Peta Prediksi Potensi Rentan Banjir di {kecamatan}")
+
+# Menampilkan peta dan marker
 m = leafmap.Map(minimap_control=True)
 m.add_basemap("OpenTopoMap")
 
-# Menambahkan marker untuk kecamatan terpilih
-coords = deskripsi_kecamatan[kecamatan]["coords"]
-m.add_marker(location=coords, popup=f"{kecamatan}: {coords}")
+if kecamatan == "Semua Kecamatan":
+    # Tambahkan marker untuk semua kecamatan
+    for nama, data in deskripsi_kecamatan.items():
+        m.add_marker(location=data["coords"], popup=f"{nama}: {data['coords']}")
+else:
+    # Tambahkan marker hanya untuk kecamatan terpilih
+    coords = deskripsi_kecamatan[kecamatan]["coords"]
+    m.add_marker(location=coords, popup=f"{kecamatan}: {coords}")
 
 # Render peta di Streamlit
 m.to_streamlit(height=500)
