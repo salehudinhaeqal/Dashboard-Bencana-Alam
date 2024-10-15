@@ -56,7 +56,7 @@ else:
 st.header(f"Peta Prediksi Potensi Rentan Banjir di {kecamatan}")
 
 # Menampilkan peta dan marker
-m = leafmap.Map(minimap_control=True)
+m = leafmap.Map(minimap_control=True, location=[-6.9147, 107.6098], zoom_start=12)  # Fokus ke Bandung
 m.add_basemap("OpenTopoMap")
 
 if kecamatan == "Semua Kecamatan":
