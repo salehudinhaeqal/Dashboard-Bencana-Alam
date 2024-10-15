@@ -3,38 +3,38 @@ import leafmap.foliumap as leafmap
 
 st.set_page_config(layout="wide")
 
-# Daftar kecamatan di Bandung dan deskripsinya
+# Daftar kecamatan di Bandung beserta deskripsi dan koordinatnya
 deskripsi_kecamatan = {
-    "Andir": "Andir terkenal dengan pusat tekstil dan beberapa pasar grosir di Bandung.",
-    "Astanaanyar": "Astanaanyar memiliki sejarah panjang dan terkenal dengan kawasan perumahan serta perkantoran.",
-    "Antapani": "Antapani adalah wilayah pemukiman dengan banyak sekolah dan fasilitas umum.",
-    "Arcamanik": "Arcamanik terkenal dengan stadion olahraga dan lapangan golf.",
-    "Babakan Ciparay": "Babakan Ciparay adalah daerah padat penduduk dengan aktivitas perdagangan dan industri kecil.",
-    "Bandung Kidul": "Bandung Kidul dikenal sebagai area perumahan dengan komunitas yang beragam.",
-    "Bandung Kulon": "Bandung Kulon memiliki banyak kawasan industri dan pusat kegiatan ekonomi.",
-    "Bandung Wetan": "Bandung Wetan merupakan pusat komersial dan perkantoran, dekat dengan pusat kota.",
-    "Batununggal": "Batununggal adalah area perumahan dengan beberapa kompleks perumahan modern.",
-    "Bojongloa Kaler": "Bojongloa Kaler dikenal dengan pasar tradisional dan kawasan perumahan.",
-    "Bojongloa Kidul": "Bojongloa Kidul merupakan area yang berkembang dengan banyak pusat perdagangan.",
-    "Buahbatu": "Buahbatu adalah wilayah yang berkembang pesat dengan banyak tempat makan dan perumahan.",
-    "Cibeunying Kaler": "Cibeunying Kaler memiliki banyak ruang terbuka hijau dan kawasan kampus.",
-    "Cibeunying Kidul": "Cibeunying Kidul dikenal sebagai kawasan pemukiman yang asri.",
-    "Cibiru": "Cibiru merupakan area yang berkembang dengan beberapa kampus dan pusat pendidikan.",
-    "Cicendo": "Cicendo dikenal sebagai kawasan pusat transportasi dan komersial.",
-    "Cidadap": "Cidadap terkenal dengan kawasan wisata alam dan perumahan elit.",
-    "Cinambo": "Cinambo merupakan area yang berkembang dengan pusat perumahan baru.",
-    "Coblong": "Coblong memiliki kawasan pendidikan dan komersial yang aktif.",
-    "Gedebage": "Gedebage dikenal dengan stadion dan pusat olahraga di Bandung.",
-    "Kiaracondong": "Kiaracondong adalah kawasan industri dan komersial dengan akses transportasi mudah.",
-    "Lengkong": "Lengkong merupakan area pemukiman dan pusat pendidikan.",
-    "Mandalajati": "Mandalajati memiliki banyak kawasan hijau dan area perumahan.",
-    "Panyileukan": "Panyileukan dikenal dengan perumahan modern dan pusat pendidikan.",
-    "Rancasari": "Rancasari merupakan area industri dan pemukiman.",
-    "Regol": "Regol dikenal dengan kawasan budaya dan sejarah.",
-    "Sukajadi": "Sukajadi merupakan pusat perbelanjaan dan perdagangan.",
-    "Sukasari": "Sukasari memiliki banyak tempat makan dan pusat perbelanjaan.",
-    "Sumur Bandung": "Sumur Bandung adalah pusat kota dengan banyak gedung bersejarah dan pusat komersial.",
-    "Ujungberung": "Ujungberung merupakan kawasan perumahan dan pusat kegiatan seni."
+    "Andir": {"desc": "Pusat tekstil dan pasar grosir.", "coords": [-6.9149, 107.5924]},
+    "Astanaanyar": {"desc": "Kawasan perumahan dan perkantoran.", "coords": [-6.9285, 107.6037]},
+    "Antapani": {"desc": "Wilayah pemukiman dengan banyak sekolah.", "coords": [-6.9147, 107.6572]},
+    "Arcamanik": {"desc": "Dikenal dengan stadion dan lapangan golf.", "coords": [-6.9025, 107.6794]},
+    "Babakan Ciparay": {"desc": "Daerah padat dengan industri kecil.", "coords": [-6.9474, 107.5789]},
+    "Bandung Kidul": {"desc": "Area perumahan dengan komunitas beragam.", "coords": [-6.9615, 107.6348]},
+    "Bandung Kulon": {"desc": "Pusat industri dan kegiatan ekonomi.", "coords": [-6.9267, 107.5733]},
+    "Bandung Wetan": {"desc": "Pusat komersial dan perkantoran.", "coords": [-6.9115, 107.6266]},
+    "Batununggal": {"desc": "Area dengan perumahan modern.", "coords": [-6.9437, 107.6282]},
+    "Bojongloa Kaler": {"desc": "Dikenal dengan pasar tradisional.", "coords": [-6.9263, 107.5897]},
+    "Bojongloa Kidul": {"desc": "Kawasan perdagangan berkembang.", "coords": [-6.9454, 107.6036]},
+    "Buahbatu": {"desc": "Wilayah dengan banyak tempat makan.", "coords": [-6.9606, 107.6404]},
+    "Cibeunying Kaler": {"desc": "Memiliki ruang hijau dan kampus.", "coords": [-6.8861, 107.6362]},
+    "Cibeunying Kidul": {"desc": "Kawasan pemukiman asri.", "coords": [-6.9031, 107.6367]},
+    "Cibiru": {"desc": "Area dengan beberapa kampus.", "coords": [-6.9174, 107.7194]},
+    "Cicendo": {"desc": "Kawasan transportasi dan komersial.", "coords": [-6.9018, 107.5979]},
+    "Cidadap": {"desc": "Kawasan wisata alam dan elit.", "coords": [-6.8583, 107.6031]},
+    "Cinambo": {"desc": "Pusat perumahan baru.", "coords": [-6.9086, 107.7105]},
+    "Coblong": {"desc": "Kawasan pendidikan dan komersial.", "coords": [-6.8903, 107.6167]},
+    "Gedebage": {"desc": "Dikenal dengan stadion olahraga.", "coords": [-6.9480, 107.7228]},
+    "Kiaracondong": {"desc": "Kawasan industri dan transportasi.", "coords": [-6.9319, 107.6432]},
+    "Lengkong": {"desc": "Area pemukiman dan pusat pendidikan.", "coords": [-6.9282, 107.6246]},
+    "Mandalajati": {"desc": "Memiliki banyak kawasan hijau.", "coords": [-6.8766, 107.6667]},
+    "Panyileukan": {"desc": "Perumahan modern dan pusat pendidikan.", "coords": [-6.9431, 107.7185]},
+    "Rancasari": {"desc": "Area industri dan pemukiman.", "coords": [-6.9600, 107.6818]},
+    "Regol": {"desc": "Kawasan budaya dan sejarah.", "coords": [-6.9285, 107.6064]},
+    "Sukajadi": {"desc": "Pusat perbelanjaan dan perdagangan.", "coords": [-6.8830, 107.5837]},
+    "Sukasari": {"desc": "Banyak tempat makan dan belanja.", "coords": [-6.8737, 107.5939]},
+    "Sumur Bandung": {"desc": "Pusat kota dengan gedung bersejarah.", "coords": [-6.9128, 107.6079]},
+    "Ujungberung": {"desc": "Perumahan dan pusat seni.", "coords": [-6.9173, 107.7178]}
 }
 
 # Sidebar untuk memilih kecamatan
@@ -47,18 +47,17 @@ st.sidebar.image(logo)
 
 # Judul halaman dan deskripsi dinamis
 st.title(f"Dashboard Bencana Alam - {kecamatan}")
-
-st.markdown(
-    f"""
-    **{kecamatan}**: {deskripsi_kecamatan[kecamatan]}
-    """
-)
+st.markdown(f"**{kecamatan}**: {deskripsi_kecamatan[kecamatan]['desc']}")
 
 st.header(f"Peta Prediksi Potensi Rentan Banjir di Kecamatan {kecamatan}")
 
 # Menampilkan peta dengan lokasi kecamatan terpilih
 m = leafmap.Map(minimap_control=True)
 m.add_basemap("OpenTopoMap")
+
+# Menambahkan marker untuk kecamatan terpilih
+coords = deskripsi_kecamatan[kecamatan]["coords"]
+m.add_marker(location=coords, popup=f"{kecamatan}: {coords}")
 
 # Render peta di Streamlit
 m.to_streamlit(height=500)
