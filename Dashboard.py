@@ -13,12 +13,17 @@ st.write("Data yang dibaca:", df)
 # Mengonversi data CSV menjadi struktur dictionary
 deskripsi_kecamatan = {}
 for _, row in df.iterrows():
-    # Pastikan latitude dan longitude tidak kosong
-    if pd.notnull(row["latitude"]) and pd.notnull(row["longitude"]):
-        deskripsi_kecamatan[row["lokasi"]] = {
-            "desc": f"Kategori Curah Hujan: {row['Kategori Curah Hujan']}, Labeling: {row['Labeling']}",
-            "coords": [float(row["latitude"]), float(row["longitude"])]  # Pastikan tipe data float
-        }
+    # Pastikan latitude dan longitude tidak kosong dan bisa dikonversi ke float
+    try:
+        lat = float(row["latitude"])
+        lon = float(row["longitude"])
+        if pd.notnull(lat) and pd.notnull(lon):  # Pastikan bukan NaN
+            deskripsi_kecamatan[row["lokasi"]] = {
+                "desc": f"Kategori Curah Hujan: {row['Kategori Curah Hujan']}, Labeling: {row['Labeling']}",
+                "coords": [lat, lon]  # Menyimpan sebagai list [latitude, longitude]
+            }
+    except (ValueError, TypeError) as e:
+        st.warning(f"Koordinat tidak valid untuk {row['lokasi']}: {row['latitude']}, {row['longitude']}")
 
 # Sidebar untuk memilih kecamatan, termasuk opsi 'Semua Kecamatan'
 st.sidebar.title("Kecamatan di Bandung")
