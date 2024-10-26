@@ -14,6 +14,7 @@ deskripsi_kecamatan = {
         "coords": [row["latitude"], row["longitude"]]
     }
     for _, row in df.iterrows()
+    if pd.notnull(row["latitude"]) and pd.notnull(row["longitude"])  # Cek apakah koordinat tidak kosong
 }
 
 # Sidebar untuk memilih kecamatan, termasuk opsi 'Semua Kecamatan'
@@ -41,11 +42,13 @@ m.add_basemap("OpenTopoMap")
 if kecamatan == "Semua Kecamatan":
     # Tambahkan marker untuk semua kecamatan
     for nama, data in deskripsi_kecamatan.items():
-        m.add_marker(location=data["coords"], popup=f"{nama}: {data['desc']}")
+        if isinstance(data["coords"][0], (float, int)) and isinstance(data["coords"][1], (float, int)):
+            m.add_marker(location=data["coords"], popup=f"{nama}: {data['desc']}")
 else:
     # Tambahkan marker hanya untuk kecamatan terpilih
     coords = deskripsi_kecamatan[kecamatan]["coords"]
-    m.add_marker(location=coords, popup=f"{kecamatan}: {deskripsi_kecamatan[kecamatan]['desc']}")
+    if isinstance(coords[0], (float, int)) and isinstance(coords[1], (float, int)):
+        m.add_marker(location=coords, popup=f"{kecamatan}: {deskripsi_kecamatan[kecamatan]['desc']}")
 
 # Render peta di Streamlit
 m.to_streamlit(height=500)
