@@ -7,18 +7,18 @@ st.set_page_config(layout="wide")
 # Membaca file CSV hasil labeling
 df = pd.read_csv("Dataset_Banjir_Lengkap.csv")  # Ganti nama file jika berbeda
 
-# Debugging: Cek data yang dibaca
-st.write("Data yang dibaca:", df.head())
+# Debugging: Tampilkan data yang dibaca
+st.write("Data yang dibaca:", df)
 
 # Mengonversi data CSV menjadi struktur dictionary
-deskripsi_kecamatan = {
-    row["lokasi"]: {
-        "desc": f"Kategori Curah Hujan: {row['Kategori Curah Hujan']}, Labeling: {row['Labeling']}",
-        "coords": [row["latitude"], row["longitude"]]
-    }
-    for _, row in df.iterrows()
-    if pd.notnull(row["latitude"]) and pd.notnull(row["longitude"])  # Cek apakah koordinat tidak kosong
-}
+deskripsi_kecamatan = {}
+for _, row in df.iterrows():
+    # Pastikan latitude dan longitude tidak kosong
+    if pd.notnull(row["latitude"]) and pd.notnull(row["longitude"]):
+        deskripsi_kecamatan[row["lokasi"]] = {
+            "desc": f"Kategori Curah Hujan: {row['Kategori Curah Hujan']}, Labeling: {row['Labeling']}",
+            "coords": [float(row["latitude"]), float(row["longitude"])]  # Pastikan tipe data float
+        }
 
 # Sidebar untuk memilih kecamatan, termasuk opsi 'Semua Kecamatan'
 st.sidebar.title("Kecamatan di Bandung")
@@ -45,13 +45,14 @@ m.add_basemap("OpenTopoMap")
 if kecamatan == "Semua Kecamatan":
     # Tambahkan marker untuk semua kecamatan
     for nama, data in deskripsi_kecamatan.items():
-        if isinstance(data["coords"][0], (float, int)) and isinstance(data["coords"][1], (float, int)):
-            st.write(f"Menambahkan marker untuk {nama} di {data['coords']}")  # Debugging: Tampilkan informasi marker
-            m.add_marker(location=data["coords"], popup=f"{nama}: {data['desc']}")
+        coords = data["coords"]
+        if isinstance(coords, list) and len(coords) == 2:  # Pastikan koordinat valid
+            st.write(f"Menambahkan marker untuk {nama} di {coords}")  # Debugging: Tampilkan informasi marker
+            m.add_marker(location=coords, popup=f"{nama}: {data['desc']}")
 else:
     # Tambahkan marker hanya untuk kecamatan terpilih
-    coords = deskripsi_kecamatan[kecamatan]["coords"]
-    if isinstance(coords[0], (float, int)) and isinstance(coords[1], (float, int)):
+    coords = deskripsi_kecamatan.get(kecamatan, {}).get("coords")
+    if coords and isinstance(coords, list) and len(coords) == 2:  # Pastikan koordinat valid
         st.write(f"Menambahkan marker untuk {kecamatan} di {coords}")  # Debugging: Tampilkan informasi marker
         m.add_marker(location=coords, popup=f"{kecamatan}: {deskripsi_kecamatan[kecamatan]['desc']}")
 
