@@ -9,9 +9,9 @@ df = pd.read_csv("Dataset_Banjir_Lengkap.csv")  # Ganti nama file jika berbeda
 
 # Mengonversi data CSV menjadi struktur dictionary yang mirip dengan deskripsi_kecamatan
 deskripsi_kecamatan = {
-    row["nama_kecamatan"]: {
-        "desc": row["deskripsi"],
-        "coords": [row["lat"], row["lon"]]
+    row["lokasi"]: {
+        "desc": f"Kategori Curah Hujan: {row['Kategori Curah Hujan']}, Labeling: {row['Labeling']}",
+        "coords": [row["latitude"], row["longitude"]]
     }
     for _, row in df.iterrows()
 }
